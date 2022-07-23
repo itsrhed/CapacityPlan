@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using CapacityPlanApp.Core.DTO.Response;
+using CapacityPlanApp.Core.Models;
 using CapacityPlanApp.Database;
 using CapacityPlanApp.Models;
 using CapacityPlanApp.Models.DTO.Request.CapacityPlanDTO;
 using CapacityPlanApp.Repository.Interfaces;
 using CapacityPlanApp.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +25,11 @@ namespace CapacityPlanApp.Services
         private DatabaseContext _repositoryContext { get; set; }
 
         /// <summary>
+        /// The HTTP context accessor
+        /// </summary>
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        /// <summary>
         /// Gets or sets the mapper.
         /// </summary>
         private IMapper _mapper { get; set; }
@@ -34,10 +42,12 @@ namespace CapacityPlanApp.Services
         public CapacityPlanService(
             DatabaseContext repositoryContext,
             ICapacityPlanRepository capacityPlanRepository,
+            IHttpContextAccessor httpContextAccessor,
             IMapper mapper)
         {
             _capacityPlanRepository = capacityPlanRepository;
             _repositoryContext = repositoryContext;
+            _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
         }
 
@@ -48,6 +58,15 @@ namespace CapacityPlanApp.Services
             //_httpContextAccessor.HttpContext.Response.Headers.Add("X-Pagination", PagedList<Entity>.ToJson(agentAdmins));
 
             return new ApiResponse(capacityPlan, HttpStatusCode.OK);
+        }
+
+        public async Task<ApiResponse> GetCapacityPlans(CapacityPlanQueryParameters capacityPlanQueryParameters)
+        {
+            var capacityPlans = await _capacityPlanRepository.GetCapacityPlans(capacityPlanQueryParameters);           
+
+            _httpContextAccessor.HttpContext.Response.Headers.Add("X-Pagination", PagedList<CapacityPlan>.ToJson(capacityPlans));
+
+            return new ApiResponse(capacityPlans, HttpStatusCode.OK);
         }
 
         public async Task<ApiResponse> CreateCapacityPlan(CapacityPlanCreate capacityPlanCreate)

@@ -28,8 +28,8 @@ namespace CapacityPlanApp.Database.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("cap_view");
 
-                    b.Property<byte>("IsDeleted")
-                        .HasColumnType("tinyint(0)")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("is_deleted");
 
                     b.Property<string>("Status")
@@ -65,9 +65,30 @@ namespace CapacityPlanApp.Database.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("date_to");
 
-                    b.Property<byte>("IsDeleted")
-                        .HasColumnType("tinyint(0)")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("is_deleted");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("name");
+
+                    b.Property<int?>("project_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("project_id");
+
+                    b.ToTable("capacity_plan_details");
+                });
+
+            modelBuilder.Entity("CapacityPlanApp.Models.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     b.Property<string>("Name")
                         .HasColumnType("varchar(200)")
@@ -75,7 +96,7 @@ namespace CapacityPlanApp.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("capacity_plan_details");
+                    b.ToTable("Project");
                 });
 
             modelBuilder.Entity("CapacityPlanApp.Models.CapacityPlan", b =>
@@ -85,6 +106,15 @@ namespace CapacityPlanApp.Database.Migrations
                         .HasForeignKey("cp_details_id");
 
                     b.Navigation("CapacityPlanDetails");
+                });
+
+            modelBuilder.Entity("CapacityPlanApp.Models.CapacityPlanDetails", b =>
+                {
+                    b.HasOne("CapacityPlanApp.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("project_id");
+
+                    b.Navigation("Project");
                 });
 #pragma warning restore 612, 618
         }

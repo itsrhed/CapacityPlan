@@ -16,6 +16,7 @@ namespace CapacityPlanApp.Database
 
         public DbSet<CapacityPlan> CapacityPlan { get; set; }
         public DbSet<CapacityPlanDetails> CapacityPlanDetails { get; set; }
+        public DbSet<Project> Project { get; set; }
 
     }
 }

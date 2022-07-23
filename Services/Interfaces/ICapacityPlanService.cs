@@ -14,5 +14,7 @@ namespace CapacityPlanApp.Services.Interfaces
         Task<ApiResponse> CreateCapacityPlan(CapacityPlanCreate capacityPlanCreate);
 
         Task<ApiResponse> UpdateCapacityPlan(CapacityPlanIdDetails capacityPlanIdDetails, CapacityPlanUpdate capacityPlanUpdate);
+
+        Task<ApiResponse> GetCapacityPlans(CapacityPlanQueryParameters capacityPlanQueryParameters);
     }
 }

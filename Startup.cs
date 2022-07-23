@@ -55,10 +55,12 @@ namespace CapacityPlanApp
                 // add new profiles here
                 mc.AddProfile(new CapacityPlanProfile());
                 mc.AddProfile(new CapacityPlanDetailsProfile());
+                mc.AddProfile(new ProjectProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // services here
             services.AddTransient<ICapacityPlanService, CapacityPlanService>();

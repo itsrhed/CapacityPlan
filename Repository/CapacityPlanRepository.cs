@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CapacityPlanApp.Core.Models;
 using CapacityPlanApp.Core.Repository;
 using CapacityPlanApp.Database;
 using CapacityPlanApp.Models;
@@ -38,9 +39,22 @@ namespace CapacityPlanApp.Repository
         public async Task<CapacityPlan> GetCapacityPlan(CapacityPlanIdDetails capacityPlanIdDetails)
         {
             var capacityPlan = _repositoryContext.Set<CapacityPlan>()
-                .Where(x => x.Id == capacityPlanIdDetails.Id).Include(x => x.CapacityPlanDetails).SingleOrDefault();
+                .Where(x => x.Id == capacityPlanIdDetails.Id)
+                .Include(x => x.CapacityPlanDetails)
+                .Include(x => x.CapacityPlanDetails.Project)
+                .SingleOrDefault();
 
             return await Task.FromResult(capacityPlan);
+        }
+
+        public async Task<PagedList<CapacityPlan>> GetCapacityPlans(CapacityPlanQueryParameters capacityPlanQueryParameters)
+        {
+            return PagedList<CapacityPlan>.ToPagedList(FindAll()
+                .Include(x => x.CapacityPlanDetails)
+                .Include(x => x.CapacityPlanDetails.Project)
+                .OrderBy(on => on.Id),
+                capacityPlanQueryParameters.PageNumber,
+                capacityPlanQueryParameters.PageSize);
         }
 
 

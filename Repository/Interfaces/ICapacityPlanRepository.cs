@@ -1,4 +1,5 @@
-﻿using CapacityPlanApp.Models;
+﻿using CapacityPlanApp.Core.Models;
+using CapacityPlanApp.Models;
 using CapacityPlanApp.Models.DTO.Request.CapacityPlanDTO;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,13 @@ namespace CapacityPlanApp.Repository.Interfaces
         /// <param name="capacityPlanIdDetails"></param>
         /// <returns></returns>
         Task<CapacityPlan> GetCapacityPlan(CapacityPlanIdDetails capacityPlanIdDetails);
+
+        /// <summary>
+        /// Gets Paged Capacity Plan
+        /// </summary>
+        /// <param name="capacityPlanQueryParameters"></param>
+        /// <returns></returns>
+        Task<PagedList<CapacityPlan>> GetCapacityPlans(CapacityPlanQueryParameters capacityPlanQueryParameters);
 
         /// <summary>
         /// Updates Capacity Plan

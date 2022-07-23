@@ -27,13 +27,13 @@ namespace CapacityPlanApp.Controllers
             _capacityPlanService = capacityPlanService;
             _capacityPlanDetailsService = capacityPlanDetailsService;
         }
-
-        // GET: api/<ValuesController>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        
+        [HttpGet]
+        public async Task<IActionResult> GetCapacityPlans([FromQuery] CapacityPlanQueryParameters capacityPlanQueryParameters)
+        {
+            var result = await _capacityPlanService.GetCapacityPlans(capacityPlanQueryParameters);
+            return StatusCode((int)result.Code, result.Value);
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCapacityPlan(int id)
@@ -49,12 +49,6 @@ namespace CapacityPlanApp.Controllers
             var result = await _capacityPlanService.CreateCapacityPlan(capacityPlanCreate);
             return StatusCode((int)result.Code, result.Value);
         }
-
-        // PUT api/<ValuesController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCapacityPlan(int id, [FromBody] CapacityPlanUpdate capacityPlanUpdate)

@@ -25,6 +25,10 @@ namespace CapacityPlanApp.Models
         [Column("date_to", TypeName = "varchar(200)")]
         public string DateTo { get; set; }
 
+        // Foreign key   
+        [ForeignKey("project_id")]
+        public virtual Project Project { get; set; }
+
         [Column("is_deleted", TypeName = "tinyint(1)")]
         public bool IsDeleted { get; set; }
 
