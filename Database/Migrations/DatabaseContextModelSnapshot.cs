@@ -65,10 +65,6 @@ namespace CapacityPlanApp.Database.Migrations
                         .HasColumnType("varchar(200)")
                         .HasColumnName("date_to");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_deleted");
-
                     b.Property<string>("Name")
                         .HasColumnType("varchar(200)")
                         .HasColumnName("name");

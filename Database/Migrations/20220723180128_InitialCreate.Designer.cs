@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CapacityPlanApp.Database.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220723170647_InitialCreate")]
+    [Migration("20220723180128_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,10 +66,6 @@ namespace CapacityPlanApp.Database.Migrations
                     b.Property<string>("DateTo")
                         .HasColumnType("varchar(200)")
                         .HasColumnName("date_to");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_deleted");
 
                     b.Property<string>("Name")
                         .HasColumnType("varchar(200)")

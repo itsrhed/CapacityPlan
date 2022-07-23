@@ -29,8 +29,7 @@ namespace CapacityPlanApp.Database.Migrations
                     name = table.Column<string>(type: "varchar(200)", nullable: true),
                     date_from = table.Column<string>(type: "varchar(200)", nullable: true),
                     date_to = table.Column<string>(type: "varchar(200)", nullable: true),
-                    project_id = table.Column<int>(type: "int", nullable: true),
-                    is_deleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    project_id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

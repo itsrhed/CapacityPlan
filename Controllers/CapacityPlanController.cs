@@ -1,6 +1,5 @@
 ﻿using CapacityPlanApp.Models.DTO.Request;
 using CapacityPlanApp.Models.DTO.Request.CapacityPlanDTO;
-using CapacityPlanApp.Models.DTO.Request.CapacityPlanDetailsDTO;
 using CapacityPlanApp.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,12 +19,10 @@ namespace CapacityPlanApp.Controllers
     {
         private readonly ICapacityPlanService _capacityPlanService;
 
-        private readonly ICapacityPlanDetailsService _capacityPlanDetailsService;
 
-        public CapacityPlanController(ICapacityPlanService capacityPlanService, ICapacityPlanDetailsService capacityPlanDetailsService)
+        public CapacityPlanController(ICapacityPlanService capacityPlanService)
         {
             _capacityPlanService = capacityPlanService;
-            _capacityPlanDetailsService = capacityPlanDetailsService;
         }
         
         [HttpGet]

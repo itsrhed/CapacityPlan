@@ -13,6 +13,5 @@ namespace CapacityPlanApp.Models.DTO.Request.CapacityPlanDetailsDTO
         public string DateTo { get; set; }
         public virtual ProjectUpdate Project { get; set; }
 
-        public bool IsDeleted { get; set; }
     }
 }

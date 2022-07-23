@@ -64,11 +64,9 @@ namespace CapacityPlanApp
 
             // services here
             services.AddTransient<ICapacityPlanService, CapacityPlanService>();
-            services.AddTransient<ICapacityPlanDetailsService, CapacityPlanDetailsService>();
 
             // repositories here
             services.AddScoped<ICapacityPlanRepository, CapacityPlanRepository>();
-            services.AddScoped<ICapacityPlanDetailsRepository, CapacityPlanDetailsRepository>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
@@ -99,10 +97,10 @@ namespace CapacityPlanApp
             {
                 endpoints.MapControllers();
 
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("Hello World!");
+                //});
             });
         }
     }

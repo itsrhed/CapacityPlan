@@ -29,12 +29,5 @@ namespace CapacityPlanApp.Models
         [ForeignKey("project_id")]
         public virtual Project Project { get; set; }
 
-        [Column("is_deleted", TypeName = "tinyint(1)")]
-        public bool IsDeleted { get; set; }
-
-        public CapacityPlanDetails() {
-            IsDeleted = false;
-        }
-
     }
 }
